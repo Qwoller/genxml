@@ -107,9 +107,7 @@ class MeowImportXml
                 }
             }
             $allproduct->sku = $my_super_product->get_sku();
-            echo '<pre>';
-            var_dump($allproduct);
-            echo '</pre>';
+
             $this->xml->startElement('offer');
             $this->xml->writeAttribute('id', $allproduct->sku);
             $this->xml->writeAttribute('available', 'true');
@@ -141,8 +139,9 @@ class MeowImportXml
 
                 if ($product_categories && !is_wp_error($product_categories)) {
                     foreach ($product_categories as $category) {
-                        // Выводим название категории
-                        echo $category->name . '<br>';
+                        echo '<pre>';
+                        var_dump($category);
+                        echo '</pre>';
                     }
                 }
                 foreach ($allproduct->categories as $cat) {
