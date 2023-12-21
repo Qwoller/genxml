@@ -109,7 +109,6 @@ class MeowImportXml
             $allproduct->sku = $my_super_product->get_sku();
             echo '<pre>';
             var_dump($allproduct->sku);
-            var_dump($allproduct['sku']);
             echo '</pre>';
             $this->xml->startElement('offer');
 //                $this->xml->writeAttribute('id', $allproduct->sku);
