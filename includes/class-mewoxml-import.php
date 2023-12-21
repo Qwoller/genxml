@@ -95,8 +95,7 @@ class MeowImportXml
 
             $product_id = $allproduct->ID;
             $allproduct->url = get_permalink($product_id);
-            $allproduct->gender = get_the_terms($product_id, 'pa_gender');
-            $allproduct->type_product = get_the_terms($product_id, 'pa_type_product');
+
             $my_super_product = wc_get_product($product_id);
             if ($my_super_product->is_type('variable')) {
                 $variations = $my_super_product->get_available_variations();
