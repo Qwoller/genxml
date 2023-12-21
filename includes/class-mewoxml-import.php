@@ -108,24 +108,25 @@ class MeowImportXml
             }
             $allproduct->sku = $my_super_product->get_sku();
             echo '<pre>';
-            var_dump($allproduct);
+            var_dump($allproduct->sku);
+            var_dump($allproduct['sku']);
             echo '</pre>';
             $this->xml->startElement('offer');
-                $this->xml->writeAttribute('id', $allproduct->sku);
-                $this->xml->writeAttribute('available', 'true');
-
-                $this->xml->startElement('url');
-                    $this->xml->text($allproduct['url']);
-                $this->xml->endElement();
-                if (!empty($allproduct->price) and !empty($allproduct->old_price)) {
-                    $this->xml->startElement('oldprice');
-                    $this->xml->text($allproduct->old_price);
-                    $this->xml->endElement();
-
-                    $this->xml->startElement('price');
-                    $this->xml->text($allproduct->price);
-                    $this->xml->endElement();
-                }
+//                $this->xml->writeAttribute('id', $allproduct->sku);
+//                $this->xml->writeAttribute('available', 'true');
+//
+//                $this->xml->startElement('url');
+//                    $this->xml->text($allproduct['url']);
+//                $this->xml->endElement();
+//                if (!empty($allproduct->price) and !empty($allproduct->old_price)) {
+//                    $this->xml->startElement('oldprice');
+//                    $this->xml->text($allproduct->old_price);
+//                    $this->xml->endElement();
+//
+//                    $this->xml->startElement('price');
+//                    $this->xml->text($allproduct->price);
+//                    $this->xml->endElement();
+//                }
             $this->xml->endElement();// offers
             $this->xml->endElement();// shop
             $this->xml->endElement();// yml_catalog
