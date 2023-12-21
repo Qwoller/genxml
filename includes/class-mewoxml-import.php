@@ -159,8 +159,6 @@ class MeowImportXml
             $this->xml->startElement('description');
             $this->xml->text(strip_tags($allproduct['post_content']));
             $this->xml->endElement();
-            $link = '';
-            $model = '';
 
             $this->xml->startElement('param');
             $this->xml->writeAttribute('name', 'Возраст');
