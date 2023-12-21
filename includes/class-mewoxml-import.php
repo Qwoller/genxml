@@ -66,7 +66,7 @@ class MeowImportXml
             }
         }
 
-        var_dump($allcat);
+
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
             $this->xml->startElement('category');
@@ -90,6 +90,10 @@ class MeowImportXml
         );
         $query = new WP_Query;
         $allproducts = $query->query($args);
+        echo '<pre>';
+        var_dump($allproducts);
+        echo '</pre>';
+
         $this->xml->startElement('offers');
 //        foreach ($allproducts as $allproduct) {
 //            $product_id = $allproduct->ID;
