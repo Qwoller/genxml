@@ -66,7 +66,7 @@ class MeowImportXml
             }
         }
 
-
+        var_dump($allcat);
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
             $this->xml->startElement('category');
@@ -91,81 +91,80 @@ class MeowImportXml
         $query = new WP_Query;
         $allproducts = $query->query($args);
         $this->xml->startElement('offers');
-        foreach ($allproducts as $allproduct) {
-
-            $product_id = $allproduct->ID;
-            $allproduct->url = get_permalink($product_id);
-
-            $my_super_product = wc_get_product($product_id);
-            if ($my_super_product->is_type('variable')) {
-                $variations = $my_super_product->get_available_variations();
-                foreach ($variations as $variation) {
-                    $variation_obj = wc_get_product($variation['variation_id']);
-                    $allproduct->old_price = $variation_obj->get_regular_price();
-                    $allproduct->price = $variation_obj->get_sale_price();
-                }
-            }
-            $allproduct->sku = $my_super_product->get_sku();
-
-            $this->xml->startElement('offer');
-            $this->xml->writeAttribute('id', $allproduct['sku']);
-            $this->xml->writeAttribute('available', 'true');
-            $this->xml->startElement('url');
-            $this->xml->text($allproduct['url']);
-            $this->xml->endElement();
-            if (!empty($allproduct['price']) and !empty($allproduct['old_price'])) {
-                $this->xml->startElement('oldprice');
-                $this->xml->text($allproduct['old_price']);
-                $this->xml->endElement();
-
-                $this->xml->startElement('price');
-                $this->xml->text($allproduct['price']);
-                $this->xml->endElement();
-            }
-            if (empty($allproduct['price']) and !empty($allproduct['old_price'])) {
-                $this->xml->startElement('price');
-                $this->xml->text($allproduct['old_price']);
-                $this->xml->endElement();
-            }
-
-            $this->xml->startElement('currencyId');
-            $this->xml->text('RUB');
-            $this->xml->endElement();
-
-            $this->xml->startElement('product_id');
-            $this->xml->text($product_id);
-            $this->xml->endElement();
-
-            foreach ($allproduct['categories'] as $cat) {
-                if(!empty($cat['term_id'])) {
-                    $this->xml->startElement('categoryId');
-                    $this->xml->text($cat['term_id']);
-                    $this->xml->endElement();
-                }
-            }
-            foreach ($allproduct['img'] as $img) {
-                $this->xml->startElement('picture');
-                $this->xml->text($img[0]);
-                $this->xml->endElement();
-            }
-            $this->xml->startElement('name');
-            $this->xml->text($allproduct['post_title']);
-            $this->xml->endElement();
-
-            $this->xml->startElement('vendor');
-            $this->xml->text('MEOW`ONE');
-            $this->xml->endElement();
-
-            $this->xml->startElement('description');
-            $this->xml->text(strip_tags($allproduct['post_content']));
-            $this->xml->endElement();
-
-            $this->xml->startElement('param');
-            $this->xml->writeAttribute('name', 'Возраст');
-            $this->xml->text('взрослый');
-            $this->xml->endElement();
-            $this->xml->endElement();// offer
-        }
+//        foreach ($allproducts as $allproduct) {
+//            $product_id = $allproduct->ID;
+//            $allproduct->url = get_permalink($product_id);
+//
+//            $my_super_product = wc_get_product($product_id);
+//            if ($my_super_product->is_type('variable')) {
+//                $variations = $my_super_product->get_available_variations();
+//                foreach ($variations as $variation) {
+//                    $variation_obj = wc_get_product($variation['variation_id']);
+//                    $allproduct->old_price = $variation_obj->get_regular_price();
+//                    $allproduct->price = $variation_obj->get_sale_price();
+//                }
+//            }
+//            $allproduct->sku = $my_super_product->get_sku();
+//
+//            $this->xml->startElement('offer');
+//            $this->xml->writeAttribute('id', $allproduct['sku']);
+//            $this->xml->writeAttribute('available', 'true');
+//            $this->xml->startElement('url');
+//            $this->xml->text($allproduct['url']);
+//            $this->xml->endElement();
+//            if (!empty($allproduct['price']) and !empty($allproduct['old_price'])) {
+//                $this->xml->startElement('oldprice');
+//                $this->xml->text($allproduct['old_price']);
+//                $this->xml->endElement();
+//
+//                $this->xml->startElement('price');
+//                $this->xml->text($allproduct['price']);
+//                $this->xml->endElement();
+//            }
+//            if (empty($allproduct['price']) and !empty($allproduct['old_price'])) {
+//                $this->xml->startElement('price');
+//                $this->xml->text($allproduct['old_price']);
+//                $this->xml->endElement();
+//            }
+//
+//            $this->xml->startElement('currencyId');
+//            $this->xml->text('RUB');
+//            $this->xml->endElement();
+//
+//            $this->xml->startElement('product_id');
+//            $this->xml->text($product_id);
+//            $this->xml->endElement();
+//
+//            foreach ($allproduct['categories'] as $cat) {
+//                if(!empty($cat['term_id'])) {
+//                    $this->xml->startElement('categoryId');
+//                    $this->xml->text($cat['term_id']);
+//                    $this->xml->endElement();
+//                }
+//            }
+//            foreach ($allproduct['img'] as $img) {
+//                $this->xml->startElement('picture');
+//                $this->xml->text($img[0]);
+//                $this->xml->endElement();
+//            }
+//            $this->xml->startElement('name');
+//            $this->xml->text($allproduct['post_title']);
+//            $this->xml->endElement();
+//
+//            $this->xml->startElement('vendor');
+//            $this->xml->text('MEOW`ONE');
+//            $this->xml->endElement();
+//
+//            $this->xml->startElement('description');
+//            $this->xml->text(strip_tags($allproduct['post_content']));
+//            $this->xml->endElement();
+//
+//            $this->xml->startElement('param');
+//            $this->xml->writeAttribute('name', 'Возраст');
+//            $this->xml->text('взрослый');
+//            $this->xml->endElement();
+//            $this->xml->endElement();// offer
+//        }
 
         $upload_dir = wp_get_upload_dir();
         $this->xml->endElement();// offers
