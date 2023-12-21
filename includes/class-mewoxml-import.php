@@ -145,7 +145,7 @@ class MeowImportXml
                     }
                 }
 
-                $gallery_images = get_post_meta($product_id, '_product_gallery', true);
+                $gallery_images = get_post_meta($product_id, 'product_image_gallery', true);
                 if ($gallery_images) {
                     foreach ($gallery_images as $image_id) {
                         $image_url = wp_get_attachment_url($image_id);
