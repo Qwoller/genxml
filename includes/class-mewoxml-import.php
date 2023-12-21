@@ -113,7 +113,7 @@ class MeowImportXml
                 $this->xml->writeAttribute('available', 'true');
 
                 $this->xml->startElement('url');
-                    $this->xml->text($allproduct['url']);
+                    $this->xml->text($allproduct->url);
                 $this->xml->endElement();
                 if (!empty($allproduct->price) and !empty($allproduct->old_price)) {
                     $this->xml->startElement('oldprice');
