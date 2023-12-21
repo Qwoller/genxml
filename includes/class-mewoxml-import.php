@@ -90,26 +90,26 @@ class MeowImportXml
         );
         $query = new WP_Query;
         $allproducts = $query->query($args);
-        echo '<pre>';
-        var_dump($allproducts);
-        echo '</pre>';
+
 
         $this->xml->startElement('offers');
-//        foreach ($allproducts as $allproduct) {
-//            $product_id = $allproduct->ID;
-//            $allproduct->url = get_permalink($product_id);
-//
-//            $my_super_product = wc_get_product($product_id);
-//            if ($my_super_product->is_type('variable')) {
-//                $variations = $my_super_product->get_available_variations();
-//                foreach ($variations as $variation) {
-//                    $variation_obj = wc_get_product($variation['variation_id']);
-//                    $allproduct->old_price = $variation_obj->get_regular_price();
-//                    $allproduct->price = $variation_obj->get_sale_price();
-//                }
-//            }
-//            $allproduct->sku = $my_super_product->get_sku();
-//
+        foreach ($allproducts as $allproduct) {
+            $product_id = $allproduct->ID;
+            $allproduct->url = get_permalink($product_id);
+
+            $my_super_product = wc_get_product($product_id);
+            if ($my_super_product->is_type('variable')) {
+                $variations = $my_super_product->get_available_variations();
+                foreach ($variations as $variation) {
+                    $variation_obj = wc_get_product($variation['variation_id']);
+                    $allproduct->old_price = $variation_obj->get_regular_price();
+                    $allproduct->price = $variation_obj->get_sale_price();
+                }
+            }
+            $allproduct->sku = $my_super_product->get_sku();
+            echo '<pre>';
+            var_dump($allproduct);
+            echo '</pre>';
 //            $this->xml->startElement('offer');
 //            $this->xml->writeAttribute('id', $allproduct['sku']);
 //            $this->xml->writeAttribute('available', 'true');
@@ -168,7 +168,7 @@ class MeowImportXml
 //            $this->xml->text('взрослый');
 //            $this->xml->endElement();
 //            $this->xml->endElement();// offer
-//        }
+        }
 
         $upload_dir = wp_get_upload_dir();
         $this->xml->endElement();// offers
