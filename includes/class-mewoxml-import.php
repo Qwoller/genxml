@@ -124,6 +124,7 @@ class MeowImportXml
                     $this->xml->text($allproduct->price);
                     $this->xml->endElement();
                 }
+            $this->xml->endElement();// offer
         }
         $this->xml->endElement();// offers
         $this->xml->endElement();// shop
