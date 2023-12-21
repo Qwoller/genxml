@@ -109,8 +109,8 @@ class MeowImportXml
             $allproduct->sku = $my_super_product->get_sku();
 
             $this->xml->startElement('offer');
-                $this->xml->writeAttribute('id', $allproduct->sku);
-                $this->xml->writeAttribute('available', 'true');
+            $this->xml->writeAttribute('id', $allproduct->sku);
+            $this->xml->writeAttribute('available', 'true');
 
                 $this->xml->startElement('url');
                     $this->xml->text($allproduct->url);
