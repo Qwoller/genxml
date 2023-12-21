@@ -134,21 +134,25 @@ class MeowImportXml
                 $this->xml->text($product_id);
                 $this->xml->endElement();
 
-
                 $product_categories = get_the_terms($product_id, 'product_cat');
-
                 if ($product_categories && !is_wp_error($product_categories)) {
                     foreach ($product_categories as $category) {
-                        echo '<pre>';
-                        var_dump($category);
-                        echo '</pre>';
+                        if(!empty($category->term_id)) {
+                            $this->xml->startElement('categoryId');
+                            $this->xml->text($category->term_id);
+                            $this->xml->endElement();
+                        }
                     }
                 }
-                foreach ($allproduct->categories as $cat) {
-                    if(!empty($cat->term_id)) {
-                        $this->xml->startElement('categoryId');
-                        $this->xml->text($cat->term_id);
+
+                $gallery_images = get_post_meta($product_id, '_product_gallery', true);
+                if ($gallery_images) {
+                    foreach ($gallery_images as $image_id) {
+                        $image_url = wp_get_attachment_url($image_id);
+                        $this->xml->startElement('picture');
+                        $this->xml->text($image_url);
                         $this->xml->endElement();
+
                     }
                 }
 
