@@ -110,7 +110,25 @@ class MeowImportXml
             echo '<pre>';
             var_dump($allproduct);
             echo '</pre>';
-//            $this->xml->startElement('offer');
+            $this->xml->startElement('offer');
+                $this->xml->writeAttribute('id', $allproduct->sku);
+                $this->xml->writeAttribute('available', 'true');
+
+                $this->xml->startElement('url');
+                    $this->xml->text($allproduct['url']);
+                $this->xml->endElement();
+                if (!empty($allproduct->price) and !empty($allproduct->old_price)) {
+                    $this->xml->startElement('oldprice');
+                    $this->xml->text($allproduct->old_price);
+                    $this->xml->endElement();
+
+                    $this->xml->startElement('price');
+                    $this->xml->text($allproduct->price);
+                    $this->xml->endElement();
+                }
+            $this->xml->endElement();// offers
+            $this->xml->endElement();// shop
+            $this->xml->endElement();// yml_catalog
 //            $this->xml->writeAttribute('id', $allproduct['sku']);
 //            $this->xml->writeAttribute('available', 'true');
 //            $this->xml->startElement('url');
@@ -171,9 +189,6 @@ class MeowImportXml
         }
 
         $upload_dir = wp_get_upload_dir();
-        $this->xml->endElement();// offers
-        $this->xml->endElement();// shop
-        $this->xml->endElement();// yml_catalog
         //print_r($upload_dir['basedir']);
         $xmlString = $this->xml->outputMemory();
         file_put_contents($upload_dir['basedir'] . '/yandex_direct.yml', $xmlString);
