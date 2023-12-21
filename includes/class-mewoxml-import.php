@@ -136,6 +136,15 @@ class MeowImportXml
                 $this->xml->text($product_id);
                 $this->xml->endElement();
 
+
+                $product_categories = get_the_terms($product_id, 'product_cat');
+
+                if ($product_categories && !is_wp_error($product_categories)) {
+                    foreach ($product_categories as $category) {
+                        // Выводим название категории
+                        echo $category->name . '<br>';
+                    }
+                }
                 foreach ($allproduct->categories as $cat) {
                     if(!empty($cat->term_id)) {
                         $this->xml->startElement('categoryId');
