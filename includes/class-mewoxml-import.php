@@ -60,6 +60,11 @@ class MeowImportXml
             'number' => 0,
             'pad_counts' => false,
         ]);
+
+        echo '<pre>';
+        var_dump($categories);
+        echo '</pre>';
+        die();
         if ($categories) {
             foreach ($categories as $cat) {
                 $allcat[$cat->term_id] = (array)$cat;
