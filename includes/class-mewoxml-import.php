@@ -61,10 +61,6 @@ class MeowImportXml
             'pad_counts' => false,
         ]);
 
-        echo '<pre>';
-        var_dump($categories);
-        echo '</pre>';
-        die();
         if ($categories) {
             foreach ($categories as $cat) {
                 $allcat[$cat->term_id] = (array)$cat;
@@ -99,6 +95,12 @@ class MeowImportXml
 
         $this->xml->startElement('offers');
         foreach ($allproducts as $allproduct) {
+
+            echo '<pre>';
+            var_dump($allproduct);
+            echo '</pre>';
+            die();
+
             $product_id = $allproduct->ID;
             $allproduct->url = get_permalink($product_id);
 
