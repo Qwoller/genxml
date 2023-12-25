@@ -96,11 +96,6 @@ class MeowImportXml
         $this->xml->startElement('offers');
         foreach ($allproducts as $allproduct) {
 
-            echo '<pre>';
-            var_dump($allproduct);
-            echo '</pre>';
-            die();
-
             $product_id = $allproduct->ID;
             $allproduct->url = get_permalink($product_id);
 
