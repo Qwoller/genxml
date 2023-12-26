@@ -151,6 +151,13 @@ class MeowImportXml
                     }
                 }
 
+                $product_tags = get_the_terms($product_id, 'product_tag');
+                if ($product_tags && !is_wp_error($product_tags)) {
+                    foreach ($product_tags as $tag) {
+                        var_dump($tag);
+                    }
+                }
+                die();
                 $gallery_images = get_post_meta($product_id, '_product_image_gallery');
 
                 if ($gallery_images) {
