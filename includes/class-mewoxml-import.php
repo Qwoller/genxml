@@ -79,8 +79,11 @@ class MeowImportXml
             'taxonomy'   => 'product_tag',
             'hide_empty' => false,
         ));
-        var_dump($all_tags);
-        die();
+        if ($all_tags) {
+            foreach ($all_tags as $tag) {
+                $allcat[$tag->term_id] = (array)$tag;
+            }
+        }
 
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
