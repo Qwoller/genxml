@@ -76,7 +76,7 @@ class MeowImportXml
         $allproducts = $query->query($args);
 
         $all_tags = get_terms(array(
-            'taxonomy'   => 'post_tag',
+            'taxonomy'   => 'product_tag',
             'hide_empty' => false,
         ));
         var_dump($all_tags);
