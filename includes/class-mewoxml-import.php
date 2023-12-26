@@ -79,12 +79,10 @@ class MeowImportXml
             'taxonomy'   => 'post_tag',
             'hide_empty' => false,
         ));
-        if ($all_tags && !is_wp_error($all_tags)) {
-            foreach ($all_tags as $tag) {
-                echo '<pre>';
-                var_dump($tag);
-                echo '</pre>';
-            }
+        foreach ($all_tags as $tag) {
+            echo '<pre>';
+            var_dump($tag);
+            echo '</pre>';
         }
         die();
 
