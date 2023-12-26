@@ -93,12 +93,13 @@ class MeowImportXml
             if ($product_categories && !is_wp_error($product_categories)) {
                 foreach ($product_categories as $category) {
                     if(!empty($category->term_id)) {
+                        echo '<pre>';
+                        var_dump($allcat[$category->term_id]);
+                        echo '</pre>';
 
                     }
                 }
-                echo '<pre>';
-                var_dump($product_categories);
-                echo '</pre>';
+
             }
 
             $product_tags = get_the_terms($product_id, 'product_tag');
@@ -108,12 +109,10 @@ class MeowImportXml
 
                     }
                 }
-                echo '<pre>';
-                var_dump($product_tags);
-                echo '</pre>';
             }
+            die();
         }
-        die();
+
 
 
         $this->xml->startElement('categories');
