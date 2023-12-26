@@ -96,7 +96,6 @@ class MeowImportXml
                         echo '<pre>';
                         var_dump($allcat[$category->term_id]);
                         echo '</pre>';
-
                     }
                 }
 
@@ -106,7 +105,9 @@ class MeowImportXml
             if ($product_tags && !is_wp_error($product_tags)) {
                 foreach ($product_tags as $tag) {
                     if(!empty($tag->term_id)) {
-
+                        echo '<pre>';
+                        var_dump($allcat[$tag->term_id]);
+                        echo '</pre>';
                     }
                 }
             }
