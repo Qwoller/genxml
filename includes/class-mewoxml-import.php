@@ -107,11 +107,6 @@ class MeowImportXml
             }
         }
 
-        echo '<pre>';
-        var_dump($allcat);
-        echo '</pre>';
-
-        die();
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
             $this->xml->startElement('category');
