@@ -67,6 +67,26 @@ class MeowImportXml
             }
         }
 
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+        );
+        $query = new WP_Query;
+        $allproducts = $query->query($args);
+
+        $all_tags = get_terms(array(
+            'taxonomy'   => 'post_tag',
+            'hide_empty' => false,
+        ));
+        if ($all_tags && !is_wp_error($all_tags)) {
+            foreach ($all_tags as $tag) {
+                echo '<pre>';
+                var_dump($tag);
+                echo '</pre>';
+            }
+        }
+        die();
 
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
@@ -83,15 +103,6 @@ class MeowImportXml
             }
         }
         $this->xml->endElement();
-
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-        );
-        $query = new WP_Query;
-        $allproducts = $query->query($args);
-
 
         $this->xml->startElement('offers');
         foreach ($allproducts as $allproduct) {
@@ -154,10 +165,10 @@ class MeowImportXml
                 $product_tags = get_the_terms($product_id, 'product_tag');
                 if ($product_tags && !is_wp_error($product_tags)) {
                     foreach ($product_tags as $tag) {
-                        var_dump($tag);
+
                     }
                 }
-                die();
+
                 $gallery_images = get_post_meta($product_id, '_product_image_gallery');
 
                 if ($gallery_images) {
