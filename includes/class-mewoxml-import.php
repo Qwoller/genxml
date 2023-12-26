@@ -79,11 +79,7 @@ class MeowImportXml
             'taxonomy'   => 'post_tag',
             'hide_empty' => false,
         ));
-        foreach ($all_tags as $tag) {
-            echo '<pre>';
-            var_dump($tag);
-            echo '</pre>';
-        }
+        var_dump($all_tags);
         die();
 
         $this->xml->startElement('categories');
