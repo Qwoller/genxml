@@ -88,34 +88,30 @@ class MeowImportXml
 
         foreach ($allproducts as $allproduct) {
             $product_id = $allproduct->ID;
-
             $product_categories = get_the_terms($product_id, 'product_cat');
             if ($product_categories && !is_wp_error($product_categories)) {
                 foreach ($product_categories as $category) {
                     if(!empty($category->term_id)) {
-                        echo '<pre>';
-                        var_dump($allcat[$category->term_id]);
-                        echo '</pre>';
+                        $cat_id = $allcat[$category->term_id]['term_id'];
                     }
                 }
 
             }
-
             $product_tags = get_the_terms($product_id, 'product_tag');
             if ($product_tags && !is_wp_error($product_tags)) {
                 foreach ($product_tags as $tag) {
                     if(!empty($tag->term_id)) {
-                        echo '<pre>';
-                        var_dump($allcat[$tag->term_id]);
-                        echo '</pre>';
+                        $allcat[$tag->term_id]['category_parent'] = $cat_id;
                     }
                 }
             }
-            die();
         }
 
+        echo '<pre>';
+        var_dump($allcat);
+        echo '</pre>';
 
-
+        die();
         $this->xml->startElement('categories');
         foreach ($allcat as $key => $cat) {
             $this->xml->startElement('category');
