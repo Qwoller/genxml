@@ -180,11 +180,11 @@ class MeowImportXml
 //                        }
 //                    }
 //                }
+
+                $product_tags = get_the_terms($product_id, 'product_tag');
                 if($allproduct->sku == 'KMUD21106') {
                     var_dump($product_tags);
                 }
-                $product_tags = get_the_terms($product_id, 'product_tag');
-
                 if ($product_tags && !is_wp_error($product_tags)) {
                     foreach ($product_tags as $tag) {
                         if(!empty($tag->term_id)) {
