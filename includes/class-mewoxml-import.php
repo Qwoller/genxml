@@ -67,11 +67,18 @@ class MeowImportXml
             }
         }
 
-        $args = array(
+        $args = [
             'post_type' => 'product',
             'posts_per_page' => -1,
             'post_status' => 'publish',
-        );
+            'meta_query' => [
+                [
+                    'key'     => '_stock_status',
+                    'value'   => 'instock',
+                    'compare' => '=',
+                ],
+            ],
+        ];
         $query = new WP_Query;
         $allproducts = $query->query($args);
 
