@@ -133,9 +133,7 @@ class MeowImportXml
         $this->xml->startElement('offers');
         foreach ($allproducts as $allproduct) {
 
-            if (empty($allproduct->price) and empty($allproduct->old_price)) {
-                continue;
-            }
+
 
             $product_id = $allproduct->ID;
             $allproduct->url = get_permalink($product_id);
@@ -150,7 +148,9 @@ class MeowImportXml
                 }
             }
             $allproduct->sku = $my_super_product->get_sku();
-
+            if (empty($allproduct->price) and empty($allproduct->old_price)) {
+                continue;
+            }
             $this->xml->startElement('offer');
             $this->xml->writeAttribute('id', $allproduct->sku);
             $this->xml->writeAttribute('available', 'true');
