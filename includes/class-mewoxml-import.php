@@ -166,9 +166,9 @@ class MeowImportXml
                 $this->xml->text('RUB');
                 $this->xml->endElement();
 
-                $this->xml->startElement('product_id');
-                $this->xml->text($product_id);
-                $this->xml->endElement();
+//                $this->xml->startElement('product_id');
+//                $this->xml->text($product_id);
+//                $this->xml->endElement();
 
 //                $product_categories = get_the_terms($product_id, 'product_cat');
 //                if ($product_categories && !is_wp_error($product_categories)) {
