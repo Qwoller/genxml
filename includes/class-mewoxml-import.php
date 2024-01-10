@@ -133,6 +133,10 @@ class MeowImportXml
         $this->xml->startElement('offers');
         foreach ($allproducts as $allproduct) {
 
+            if (empty($allproduct->price) and empty($allproduct->old_price)) {
+                continue;
+            }
+
             $product_id = $allproduct->ID;
             $allproduct->url = get_permalink($product_id);
 
