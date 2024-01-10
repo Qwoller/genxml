@@ -215,9 +215,9 @@ class MeowImportXml
                     }
                 }
 
-                $this->xml->startElement('vendor');
-                $this->xml->text('BEAUTY INSIDE');
-                $this->xml->endElement();
+//                $this->xml->startElement('vendor');
+//                $this->xml->text('BEAUTY INSIDE');
+//                $this->xml->endElement();
 
                 $this->xml->startElement('description');
                 $this->xml->text(strip_tags($allproduct->post_content));
